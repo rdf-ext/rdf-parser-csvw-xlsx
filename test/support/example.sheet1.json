@@ -1,0 +1,33 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "@type": "TableGroup",
+  "tables": {
+    "@type": "Table",
+    "url": {
+      "@id":"http://example.org/base"
+    },
+    "row": [{
+      "@type": "Row",
+      "describes": {
+        "@id": "http://example.org/base#s1col1row0",
+        "http://example.org/base#s1col0": "s1col0row0",
+        "http://example.org/base#s1col1": "s1col1row0"
+      },
+      "rownum": "1",
+      "url": {
+        "@id": "http://example.org/base#row=2"
+      }
+    }, {
+      "@type": "Row",
+      "describes": {
+        "@id": "http://example.org/base#s1col1row1",
+        "http://example.org/base#s1col0": "s1col0row1",
+        "http://example.org/base#s1col1": "s1col1row1"
+      },
+      "rownum": "2",
+      "url": {
+        "@id": "http://example.org/base#row=3"
+      }
+    }]
+  }
+}
