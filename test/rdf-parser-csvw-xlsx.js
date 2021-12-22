@@ -1,9 +1,9 @@
 const assert = require('assert')
 const fs = require('fs')
 const path = require('path')
+const JsonLdParser = require('@rdfjs/parser-jsonld')
 const { describe, it } = require('mocha')
 const rdf = require('rdf-ext')
-const JsonLdParser = require('@rdfjs/parser-jsonld')
 const XlsxParser = require('..')
 
 function datasetFromJsonLdFs (filename) {
@@ -21,7 +21,7 @@ describe('rdf-parser-csvw-xlsx', () => {
     return Promise.all([
       datasetFromJsonLdFs(path.join(__dirname, 'support/example.metadata.json')),
       datasetFromJsonLdFs(path.join(__dirname, 'support/example.sheet1.json'))
-    ]).then((results) => {
+    ]).then(results => {
       const metadata = results[0]
       const expected = results[1]
 
@@ -33,7 +33,7 @@ describe('rdf-parser-csvw-xlsx', () => {
         sheet: 'sheet1'
       })
 
-      return rdf.dataset().import(stream).then((dataset) => {
+      return rdf.dataset().import(stream).then(dataset => {
         assert.strictEqual(dataset.toCanonical(), expected.toCanonical())
       })
     })
