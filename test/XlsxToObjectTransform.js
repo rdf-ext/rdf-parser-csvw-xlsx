@@ -8,7 +8,7 @@ function streamToArray (stream) {
   return new Promise((resolve, reject) => {
     const array = []
 
-    stream.on('data', (data) => {
+    stream.on('data', data => {
       array.push(data)
     })
 
@@ -31,7 +31,7 @@ describe('XlsxToObjectTransform', () => {
 
     input.pipe(transform)
 
-    return streamToArray(transform).then((array) => {
+    return streamToArray(transform).then(array => {
       assert.strictEqual(typeof array.shift().row, 'object')
     })
   })
@@ -42,7 +42,7 @@ describe('XlsxToObjectTransform', () => {
 
     input.pipe(transform)
 
-    return streamToArray(transform).then((array) => {
+    return streamToArray(transform).then(array => {
       assert.strictEqual(array.shift().line, 2)
     })
   })
@@ -53,7 +53,7 @@ describe('XlsxToObjectTransform', () => {
 
     input.pipe(transform)
 
-    return streamToArray(transform).then((array) => {
+    return streamToArray(transform).then(array => {
       assert.strictEqual(array[0].row.s0col0, 's0col0row0')
     })
   })
@@ -64,7 +64,7 @@ describe('XlsxToObjectTransform', () => {
 
     input.pipe(transform)
 
-    return streamToArray(transform).then((array) => {
+    return streamToArray(transform).then(array => {
       assert.strictEqual(array[0].row.s1col0, 's1col0row0')
     })
   })
@@ -75,7 +75,7 @@ describe('XlsxToObjectTransform', () => {
 
     input.pipe(transform)
 
-    return streamToArray(transform).then((array) => {
+    return streamToArray(transform).then(array => {
       assert.strictEqual(array[0].row.s1col0, 's1col0row0')
     })
   })

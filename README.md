@@ -1,6 +1,6 @@
 # rdf-parser-csvw-xlsx
 
-A CSV on the Web based XLSX (Excel file format) parser with [RDFJS Stream interface](https://github.com/rdfjs/representation-task-force/).
+A CSV on the Web based XLSX (Excel file format) parser with [RDF/JS Stream interface](https://github.com/rdfjs/representation-task-force/).
 
 Consult the [rdf-parser-csvw](https://github.com/rdf-ext/rdf-parser-csvw) documentation about usage, which provides the technical foundation of this parser.
 

@@ -19,7 +19,7 @@ class Parser {
       }
     })
 
-    input.on('error', (err) => {
+    input.on('error', err => {
       output.emit('error', err)
     })
 
