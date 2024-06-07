@@ -1,41 +1,28 @@
-const assert = require('assert')
-const fs = require('fs')
-const path = require('path')
-const JsonLdParser = require('@rdfjs/parser-jsonld')
-const { describe, it } = require('mocha')
-const rdf = require('rdf-ext')
-const XlsxParser = require('..')
-
-function datasetFromJsonLdFs (filename) {
-  const parser = new JsonLdParser()
-
-  return rdf.dataset().import(parser.import(fs.createReadStream(filename), { factory: rdf }))
-}
+import { strictEqual } from 'node:assert'
+import { createReadStream } from 'node:fs'
+import { describe, it } from 'mocha'
+import rdf from 'rdf-ext'
+import { datasetEqual } from 'rdf-test/assert.js'
+import XlsxParser from '../index.js'
 
 describe('rdf-parser-csvw-xlsx', () => {
   it('should be a constructor', () => {
-    assert.strictEqual(typeof XlsxParser, 'function')
+    strictEqual(typeof XlsxParser, 'function')
   })
 
-  it('should parse the XLSX file using the given metadata', () => {
-    return Promise.all([
-      datasetFromJsonLdFs(path.join(__dirname, 'support/example.metadata.json')),
-      datasetFromJsonLdFs(path.join(__dirname, 'support/example.sheet1.json'))
-    ]).then(results => {
-      const metadata = results[0]
-      const expected = results[1]
-
-      const input = fs.createReadStream(path.join(__dirname, 'support/example.xlsx'))
-      const parser = new XlsxParser({ factory: rdf })
-      const stream = parser.import(input, {
-        baseIRI: 'http://example.org/base',
-        metadata: metadata,
-        sheet: 'sheet1'
-      })
-
-      return rdf.dataset().import(stream).then(dataset => {
-        assert.strictEqual(dataset.toCanonical(), expected.toCanonical())
-      })
+  it('should parse the XLSX file using the given metadata', async () => {
+    const metadata = await rdf.io.dataset.fromURL(new URL('support/example.metadata.json', import.meta.url).pathname)
+    const expected = await rdf.io.dataset.fromURL(new URL('support/example.sheet1.json', import.meta.url).pathname)
+    const input = createReadStream(new URL('support/example.xlsx', import.meta.url).pathname)
+    const parser = new XlsxParser({ factory: rdf })
+    const stream = parser.import(input, {
+      baseIRI: 'http://example.org/base',
+      metadata,
+      sheet: 'sheet1'
     })
+
+    const result = await rdf.dataset().import(stream)
+
+    datasetEqual(result, expected)
   })
 })
