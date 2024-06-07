@@ -1,6 +1,5 @@
-const assign = require('lodash/assign')
-const ObjectParserTransform = require('rdf-parser-csvw/lib/ObjectParserTransform')
-const XlsxToObjectTransform = require('./lib/XlsxToObjectTransform')
+import ObjectParserTransform from 'rdf-parser-csvw/lib/ObjectParserTransform.js'
+import XlsxToObjectTransform from './lib/XlsxToObjectTransform.js'
 
 class Parser {
   constructor (options) {
@@ -8,7 +7,7 @@ class Parser {
   }
 
   import (input, options) {
-    options = assign({}, this.options, options)
+    options = { ...this.options, ...options }
 
     const reader = new XlsxToObjectTransform(options)
     const output = new ObjectParserTransform(options)
@@ -33,4 +32,4 @@ class Parser {
   }
 }
 
-module.exports = Parser
+export default Parser
