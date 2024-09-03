@@ -28,7 +28,7 @@
   "dependencies": {
     "rdf-parser-csvw": "^1.0.0",
     "readable-stream": "^4.5.2",
-    "xlsx": "^0.18.5"
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   },
   "devDependencies": {
     "c8": "^10.0.0",
