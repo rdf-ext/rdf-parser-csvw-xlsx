@@ -31,7 +31,7 @@
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   },
   "devDependencies": {
-    "c8": "^11.0.0",
+    "c8": "^12.0.0",
     "mocha": "^11.0.1",
     "rdf-ext": "^2.5.1",
     "rdf-test": "^0.1.0",
